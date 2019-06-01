@@ -4,7 +4,6 @@ import {Stopwatch} from "./Stopwatch";
 
 export const Header = (props) => {
     console.log(props);
-    // destruct assignment
     return (
         <header>
             <Statistics players={props.players}/>
