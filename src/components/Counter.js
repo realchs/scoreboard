@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Counter = (id, score, changeScore) => (
+export const Counter = ({changeScore, score, id}) => (
     <div className='counter'>
         <button className='counter-action decrement'
                 onClick={() => changeScore(id, -1)}> -
@@ -14,8 +14,7 @@ export const Counter = (id, score, changeScore) => (
 );
 
 Counter.propTypes = {
-    id: PropTypes.number,
+    changeScore: PropTypes.func,
     score: PropTypes.number,
-    changeScore: PropTypes.func
+    id: PropTypes.number
 }
-
