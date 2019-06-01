@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {changeScore} from "../redux/actions";
+import {connect} from "react-redux";
 
-export const Counter = ({changeScore, score, id}) => (
+const Counter = ({changeScore, score, id}) => (
     <div className='counter'>
         <button className='counter-action decrement'
                 onClick={() => changeScore(id, -1)}> -
@@ -18,3 +20,9 @@ Counter.propTypes = {
     score: PropTypes.number,
     id: PropTypes.number
 }
+
+const mapActionToProps = (dispatch) => ({
+   changeScore: (id, delta) => dispatch(changeScore(id, delta))
+});
+
+export default connect(null, mapActionToProps)(Counter);

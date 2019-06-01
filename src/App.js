@@ -2,18 +2,12 @@ import React from 'react';
 import './App.css'
 import Header from "./components/Header";
 import {Player} from "./components/Player";
-import {AddPlayerForm} from "./components/AddPlayerForm";
+import AddPlayerForm from "./components/AddPlayerForm";
+import {connect} from "react-redux";
 
 
 class App extends React.Component {
-    state = {
-        players:[
-            {name: 'realchs', score: 0, id: 1},
-            {name: 'mgc', score: 0, id: 2},
-            {name: 'park', score: 0, id: 3},
-            {name: 'kim', score: 0, id: 4}
-        ]
-    }
+
     maxId = 4;
 
     handleRemovePlayer = (id) => {
@@ -35,18 +29,18 @@ class App extends React.Component {
         });
     }
 
-    handleAddPlayer = (name) => {
-        this.setState(prevState => ({
-            players: [...prevState.players, {name: name, score: 0, id: ++this.maxId}]
-        }));
-    }
+    // handleAddPlayer = (name) => {
+    //     this.setState(prevState => ({
+    //         players: [...prevState.players, {name: name, score: 0, id: ++this.maxId}]
+    //     }));
+    // }
 
     render() {
         return (
             <div className="scoreboard">
-                <Header title='My scoreboard' players={this.state.players}/>
+                <Header title='My scoreboard' players={this.props.players}/>
                 {
-                    this.state.players.map(player => (
+                    this.props.players.map(player => (
                         <Player name = {player.name} key = {player.id}
                                 id = {player.id} score={player.score} removePlayer={this.handleRemovePlayer}
                                 changeScore={this.handleChangeScore}/>
@@ -59,5 +53,9 @@ class App extends React.Component {
 
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+   players: state.playerReducer.players
+});
+
+export default connect(mapStateToProps)(App);
 
