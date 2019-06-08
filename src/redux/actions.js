@@ -1,12 +1,36 @@
-import {ADD_PLAYER, CHANGE_SCORE} from "./actiontype";
+import {ADD_PLAYER, CHANGE_SCORE, REFRESH_HERO, REMOVE_PLAYER, UPDATE_TITLE} from "./actionTypes";
 
-export const addPlayer = (name) => ({
-   type: ADD_PLAYER,
-   name
-});
+export const updateTitle = (title) => {
+  return {
+    type: UPDATE_TITLE,
+    title
+  }
+}
 
-export const changeScore = (id, delta) => ({
-   type: CHANGE_SCORE,
-   id,
-   delta
-});
+export const addPlayer = (name) => {
+  return {
+    type: ADD_PLAYER,
+    name
+  }
+}
+
+export const changeScore = (index, delta) => {
+  return {
+    type: CHANGE_SCORE,
+    index,
+    delta
+  }
+}
+
+export const removePlayer = (id) => {
+  return {
+    type: REMOVE_PLAYER,
+    id
+  }
+}
+
+export const refreshHero = () => {
+  return {
+    type: REFRESH_HERO
+  }
+}

@@ -1,7 +1,7 @@
 import {ADD_PLAYER, CHANGE_SCORE} from "../actiontype";
 
 const playerInitialState = {
-    title: "Redux Scoreboard",
+    title: "Scoreboard",
     players:[
         {name: 'realchs', score: 0, id: 1},
         {name: 'mgc', score: 0, id: 2},

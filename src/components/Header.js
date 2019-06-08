@@ -1,37 +1,41 @@
 import React from 'react';
-import {Statistics} from "./Statistics";
-import {Stopwatch} from "./Stopwatch";
 import PropTypes from 'prop-types';
+import Stats from "./Stats";
+import Stopwatch from "./Stopwatch";
 import {connect} from "react-redux";
+import {updateTitle} from "../redux/actions";
 
-const Header = ({title, players}) => {
-    // console.log(props);
-    // destruct assignment
-    // const {title, players} = props;
-    return (
-        <header>
-            <Statistics players={players}/>
-            <h1>{title}</h1>
-            <Stopwatch/>
-        </header>
-    );
+import styles from '../pages/scoreboard/Scoreboard.module.css';
+
+const Header = ({players, title, changeTitle}) => {
+  return (
+    <header className={styles.header}>
+      <Stats players={players} />
+      <h1 className={styles.h1} onClick={changeTitle}>{ title }</h1>
+      <Stopwatch />
+    </header>
+  )
 }
 
 Header.propTypes = {
-    title: PropTypes.string,
-    players: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        score: PropTypes.number,
-        id: PropTypes.number
-    }))
+  players: PropTypes.arrayOf(PropTypes.object),
+  title: PropTypes.string
 }
 
 Header.defaultProps = {
-    title: 'Default Title',
+  title: 'Scoreboard'
 }
 
-const mapStateToProps = (state) => ({
+let mapStateToProps = (state) => {
+  return {
     title: state.playerReducer.title
-})
+  }
+}
 
-export default connect(mapStateToProps)(Header)
+let mapDispatchToProps = (dispatch) => {
+  return {
+    changeTitle: () => dispatch(updateTitle('dispatch test'))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
